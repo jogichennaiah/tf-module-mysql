@@ -8,5 +8,6 @@ resource "null_resource" "schema" {
        cd mysql-main
        mysql -h ${aws_db_instance.mysql.address} -uadmin1 -proboshop1 <shipping.sql
     EOF
+    
  }
  }
