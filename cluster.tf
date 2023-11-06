@@ -1,20 +1,17 @@
-# Creates RDS instance 
-
+# Creates RDS Instance 
 resource "aws_db_instance" "mysql" {
-  identifier             = "roboshop-${var-ENV}-mysql"
+  identifier             = "roboshop-${var.ENV}-mysql"
   allocated_storage      = var.MYSQL_STORAGE
-  db_name                = "roboshop-${var.ENV}-mysql"
   engine                 = "mysql"
   engine_version         = var.MYSQL_ENGINE_VERSION
   instance_class         = var.MYSQL_INSTANCE_TYPE
-  username               = jsondecode(data.aws_secretsmanager_secret_version.secret_version.secret_string)["DOCDB_USERNAME"]
-  password               = jsondecode(data.aws_secretsmanager_secret_version.secret_version.secret_string)["DOCDB_USERNAME"]
+  username               = jsondecode(data.aws_secretsmanager_secret_version.secret_version.secret_string)["MYSQL_USERNAME"]
+  password               = jsondecode(data.aws_secretsmanager_secret_version.secret_version.secret_string)["MYSQL_PASSWORD"]
   parameter_group_name   = aws_db_parameter_group.default.name
   skip_final_snapshot    = true
   db_subnet_group_name   = aws_db_subnet_group.mysql.name
   vpc_security_group_ids = [aws_security_group.allows_mysql.id]
 }
-
 
 
 resource "aws_db_subnet_group" "mysql" {
