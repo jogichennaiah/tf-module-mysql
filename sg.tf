@@ -1,9 +1,8 @@
-# Creating security group
-
+# Creates Security Group
 resource "aws_security_group" "allows_mysql" {
-  name        = "Roboshop allows docdb internal traffic only"
-  description = "Allows only private traffic"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_CIDR
+  name        = "Roboshop allows mysql internal traffic only"
+  description = "Allows Only private traffic"
+  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
 
   ingress {
