@@ -8,7 +8,7 @@ resource "aws_db_instance" "mysql" {
   engine_version         = var.MYSQL_ENGINE_VERSION
   instance_class         = var.MYSQL_INSTANCE_TYPE
   username               = jsondecode(data.aws_secretsmanager_secret_version.secret_version.secret_string)["DOCDB_USERNAME"]
-  password               = jsondecode(data.aws_secretsmanager_secret_version.secret_version.secret_string)["DOCDB_PASSWORD"]
+  password               = jsondecode(data.aws_secretsmanager_secret_version.secret_version.secret_string)["DOCDB_USERNAME"]
   parameter_group_name   = aws_db_parameter_group.default.name
   skip_final_snapshot    = true
   db_subnet_group_name   = aws_db_subnet_group.mysql.name
